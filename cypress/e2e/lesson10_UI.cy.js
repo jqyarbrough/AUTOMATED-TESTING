@@ -23,8 +23,8 @@ describe('Check Submit Button', { timeout: 120000 }, function() {
 describe('Login- Contact App Page', { timeout: 120000 }, () => {
   it('Should successfully login', { timeout: 120000 }, () => {
     cy.visit('https://thinking-tester-contact-list.herokuapp.com/login');
-    cy.get('input[id="email"]').type('jennifer@aol.com'); 
-    cy.get('input[id="password"]').type('1234567'); 
+    cy.get('input[id="email"]').type('annie@supermutt.com'); 
+    cy.get('input[id="password"]').type('123456789'); 
     cy.get('#submit').click(); 
   });
 });
@@ -92,3 +92,26 @@ describe('Add New Contact', { timeout: 120000 }, () => {
 
   });
 });
+
+describe('Logout - Contact App Page', { timeout: 120000 }, () => {
+  it('Should successfully log out', { timeout: 120000 }, () => {
+
+    cy.visit('https://thinking-tester-contact-list.herokuapp.com/contactList');
+
+      cy.url().should('include', 'contactList');
+
+      cy.get('#logout').click(); 
+
+      cy.url().then((currentUrl) => {
+          cy.log(`Current URL after logout click: ${currentUrl}`);
+      });
+
+      cy.url().should('include', '/logout');
+
+      cy.get('input[id="email"]').should('be.visible'); 
+  });
+});
+
+
+
+
